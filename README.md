@@ -823,23 +823,49 @@ Vue.use(firestorePlugin)
 
 __Note:__ use 'rtdbPlugin' for Real Time Database.
 
-Get a database instance from Firebase (db.js):
+## Direct data binding
+
+DatabaseService.js:
 ```javascript
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
-// Get a Firestore instance
 export const db = firebase
-  .initializeApp({ projectId: 'MY PROJECT ID' })
+  .initializeApp({ projectId: 'MY PROJECT ID' }) // or an object with full config
   .firestore()
 
-// Export types that exists in Firestore
-// This is not always necessary, but it's used in other examples
-const { Timestamp, GeoPoint } = firebase.firestore
-export { Timestamp, GeoPoint }
+const tagList = db.collection('tags') // subscribed to changes
 
-// if using Firebase JS SDK < 5.8.0
-db.settings({ timestampsInSnapshots: true })
+function updateTag(tag) {
+    db.collection('tags').doc(tag.id)
+        .set(tag)
+        // .then(() => {
+        //     console.log('Correctly updated!')
+        // })
+}
+
+export {
+    tagList,
+    updateTag
+}
+```
+
+**Note**: You can't directly update a document (```tag.name = 'newName'```), you need to update it like in the method 'updateTag'.
+
+TagListComponent.vue:
+
+```javascript
+import { tagList } from "@/services/DatabaseService";
+
+export default {
+    name: 'TagList'
+    data: () => ({
+        tags: [],
+    }),
+    firestore: {
+        tags: tagList
+    }
+}
 ```
 
 
