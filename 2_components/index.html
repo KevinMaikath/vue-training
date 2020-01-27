@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2_components</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="components-demo">
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+
+        <!-- Component with input -->
+        <title-w-input title="Hello"></title-w-input>
+        <title-w-input title="Bye"></title-w-input>
+
+        <!-- Component with dynamic input -->
+        <title-w-input 
+        v-for="post in posts"
+        :key="post.id"
+        :title="post.tittle">
+        </title-w-input>
+    </div>
+</body>
+<script src="main.js"></script>
+
+</html>

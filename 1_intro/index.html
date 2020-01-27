@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>1_Intro</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- _____________________________Intro_____________________________ -->
+
+        {{ message }}
+        <br>
+        {{ title.toUpperCase() }}
+        <br>
+        {{ (display) ? message : 'Message is secret' }}
+        <br>
+        {{ count + 1 }}
+        <br>
+        <!-- Also => <button :disabled="btn_disabled"> -->
+        <button v-bind:disabled="btn_disabled">Click here!</button>
+        <br>
+        Say it louder: {{ shoutItOut }}
+
+
+
+        <!-- _____________________________Template directives_____________________________ -->
+
+        <form>
+            <input type="text" v-model="nameInput">
+            <br>
+            <button onclick="pleaseLetMeSubmit()" v-if="!allow_submit" type="button">Please ?</button>
+            <button onclick="form1Submit()" v-if="allow_submit" type="button">Submit</button>
+        </form>
+
+        <ul>
+            <li v-for="(item, index) in songs" :key="index">
+                {{ index }}. {{ item }}
+            </li>
+        </ul>
+
+        <ul>
+            <li v-for="(value, key, index) in songInfo" :key="index">
+                {{ index }}. {{ key }}: {{ value }}
+            </li>
+        </ul>
+
+        <!-- _____________________________Event handling_____________________________ -->
+
+        <p>Counter: {{ count }}</p>
+        <button @click="incrementCounter()">+1</button>
+        <button @click="incrementBy(2)">+2</button>
+
+        <a href="google.com" @click.prevent="incrementCounter()">Google +1</a>
+        <br>
+
+        <!-- Key:13 = 'Enter' key -->
+        <input type="text" @keyup.13="incrementCounter">
+        <input type="text" @keyup.esc="incrementCounter">
+
+
+        <!-- _____________________________Styling_____________________________ -->
+
+        <p :style="{color: color_red, fontSize: custom_size + 'px'}">My color is binded!</p>
+        <p :style="{borderStyleObject}">My style is binded directly!</p>
+
+
+        <!-- _____________________________Forms binding_____________________________ -->
+
+        <div style="border:1px solid black">
+            <input type="checkbox" id="jack" value="Jack" v-model="checkedNames"></input>
+            <label for="jack">Jack</label>
+            <input type="checkbox" id="john" value="John" v-model="checkedNames"></input>
+            <label for="john">John</label>
+            <input type="checkbox" id="pedro" value="Pedro" v-model="checkedNames"></input>
+            <label for="pedro">Pedro</label>
+            <br>
+            <span>Checked names: {{ checkedNames }}</span>
+        </div>
+
+        <div style="border:1px solid black">
+            <input type="checkbox" v-model="toggle" true-value="Checked" false-value="Not checked">
+            <p>{{ toggle }}</p>
+        </div>
+
+        <div style="border:1px solid black">
+            <!-- Casts the input into a number (type="number" returns a string) -->
+            <input type="number" v-model.number="myNum">
+            <p>{{ myNum }}</p>
+            <!-- Trims the input string -->
+            <input type="text" v-model.trim="myString">
+            <p>{{ myString }}</p>
+        </div>
+    </div>
+</body>
+<script src="main.js"></script>
+
+</html>
