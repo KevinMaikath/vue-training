@@ -868,6 +868,31 @@ export default {
 }
 ```
 
+**Note:** data binding occurs after the component is mounted, but you can watch for data binding (and changes) in ```updated()```.
+
+## Programmatic binding
+
+Useful when you need to change the binding if an specific object (for example, change the current user).
+
+UserComponent.vue:
+```javascript
+export default {
+    props: ['id'],
+    data() {
+        return {
+            user: null,
+        }
+    },
+    watch: {
+        id: {
+            immediate: true,    // call it upon creation too
+            handler(id) {
+                this.$bind('user', users.doc(id))
+            }
+        }
+    }
+}
+```
 
 # Ionic
 
@@ -891,7 +916,7 @@ vue create <PROJECT_NAME>
 
 ```
 npm install --save @ionic/core @ionic/vue
-npm install --save-dev ionicons@4.5.9-1
+npm install --save ionicons@4.5.9-1
 ```
 
 3. App.vue
