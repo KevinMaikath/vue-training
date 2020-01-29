@@ -896,7 +896,7 @@ export default {
 
 # Ionic
 
-## Steps
+## Set-up
 
 1. Create a Vue project
 
@@ -975,4 +975,38 @@ new Vue({
 npm run serve 
 npm run build
 npm run lint
+```
+
+## Capacitor
+In order to integrate Capacitor, follow the next steps:
+
+```
+npx cap init
+npm run build
+npx cap add android
+npx cap add ios
+npx cap run android
+npx cap run ios
+```
+
+## Tips
+
+### ModalController props
+
+```javascript
+const modal = await this.$ionic.modalController.create({
+  component: ModalComponent,
+  componentProps: {
+    // This gets passed to the component's data values
+    data: {
+      dataItem: value
+    },
+    // This gets passed as the actual 'props' values
+    propsData: {
+      propItem: value
+    }
+  }
+});
+
+await modal.present();
 ```
