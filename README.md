@@ -980,8 +980,18 @@ npm run lint
 ## Capacitor
 In order to integrate Capacitor, follow the next steps:
 
+1. Install capacitor.
+```
+npm install
+```
+
+2. Integrate capacitor in your project.
 ```
 npx cap init
+```
+
+3. Build your project and create a folder for each platform.
+```
 npm run build
 npx cap add android
 npx cap add ios
